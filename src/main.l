@@ -5,8 +5,6 @@ void yyerror(char *);
 
 #include "y.tab.h"
 
-/*%token '{' '}' ':' '"' INT FLOAT STR*/
-
 %}
 INTEIRO [0-9]+
 STRING ["][0-9A-Za-z\ ]+["]
@@ -23,7 +21,7 @@ STRING ["][0-9A-Za-z\ ]+["]
 
 [,] { return ',';}
 
-[\n] { return '\n'; }
+[\n]+ { return '\n'; }
 
 {INTEIRO} { return INT; }
 
@@ -31,7 +29,7 @@ STRING ["][0-9A-Za-z\ ]+["]
 
 {STRING} { return STR; }
 
-\[ { return '['; }
+[[] { return '['; }
 
 \] { return ']'; }
 

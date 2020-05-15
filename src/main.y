@@ -9,16 +9,16 @@ int yylex(void);
 
 %}
 
-%token '{' '}' '[' ']' ':' '"' ',' '\n' ' ' INT FLOAT STR
+%token '{' '}' '[' ']' ':' '"' ',' ' ' '\n'  INT FLOAT STR
 
 %%
 S:
-   S P '\n' { printf("VALIDO\n");}
+   S P '\n'{ printf("VALIDO\n");}
    |
    ;
 
 P:
-   '{' A ':' A '}' {}
+   '{' C '}' {}
    ; 
 
 L:
@@ -26,17 +26,19 @@ L:
    ;
 
 C:
-   A {}
+   A ':' A {}
    |A ',' A {}
    ;
 
 A:
    INT {}
    |FLOAT {}
-   |STR {} 
-   |P {}
-   |L {}
+   |STR {}
+   |'"' A '"' {}
+   |A ':' A {}
    |A '\n' {}
+   |L {}
+   |P {}
    ;
 
 %%
